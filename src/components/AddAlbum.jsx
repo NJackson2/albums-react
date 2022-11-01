@@ -1,11 +1,11 @@
 import { useState } from "react"
 
 
-export default function AddAlbum() {
+export default function AddAlbum({setToggle, toggle}) {   //pulling in a function from the parent
     const [album, setAlbum] = useState('')  //use this state variable to control this component
     const [artist, setArtist] = useState('') 
     const [year, setYear] = useState(1970) 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => {        //put in album data and it does this fetch
         e.preventDefault()
         //let's check to see that they entered all the data
         if(!album || !artist || !year) {
@@ -22,6 +22,7 @@ export default function AddAlbum() {
         })
             .then(() => {
                 //assume it worked...
+                setToggle(!toggle) // set it to the opposite of the toggle
                 setAlbum('')
                 setArtist('')
                 setYear('')
